@@ -22,7 +22,7 @@
             <div class="row">
   
                 <nav class=" header col-12 navbar navbar-light bg-dark">
-                        <a class="navbar" href="index.html">
+                        <a class="navbar" href="/index">
                         <img src="./images/bike-logo.svg" width="50" height="50" class="logo" alt="">
                         The Bike Shop Experience
                         </a>
@@ -32,7 +32,7 @@
             <div class="row ariane">
                 <nav aria-label="breadcrumb" class="col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="/index">Shop</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Basket</li>
                     </ol>
                 </nav>
@@ -69,14 +69,15 @@
                                 <%= basket[i].name %>
                             </td>
                             <td>
-                                <form>
+                                <form action="/update-shop" method="POST">
+                                    <input type="hidden" name="name" value="<%= basket[i].name %>">
                                     <input type="text" name="quantity" class="quantity" value= <%= basket[i].quantity %> >
-                                    <button class="btn btn-outline-info btn-sm" name="button"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="btn btn-outline-info btn-sm" name="refresh"><i class="fas fa-sync-alt"></i></button>
                                 </form>
                             </td>
                             <td><%= basket[i].price %>€</td>
                             <td><%= basket[i].price * basket[i].quantity %>€</td>
-                            <td><button class="btn btn-outline-info btn-sm" name="button"><i class="far fa-trash-alt"></i></button></td>
+                            <td><a class="btn btn-outline-info btn-sm" href="/delete-shop?name=<%= basket[i].name %>"><i class="far fa-trash-alt"></i></a></td>
                           </tr>
                             
                         <%

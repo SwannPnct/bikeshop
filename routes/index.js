@@ -41,29 +41,45 @@ router.get('/', function(req, res, next) {
    });
 });
 
+
+
+
 const dataCardBike = [
-  {
-    name: "BIK045",
-    img: "./images/bike-1.jpg",
-    price: 679,
-    quantity : 2
-  },
-  {
-    name: "LIK099",
-    img: "./images/bike-6.jpg",
-    price: 869,
-    quantity : 1
-  }
+  
 ];
 
-
-
-
-
 router.get('/shop', function(req,res,next) {
+  dataCardBike.push({
+    name: req.query.name,
+    img : req.query.img,
+    price : req.query.price,
+    quantity : 1,
+  });
   res.render('shop', {
     basket: dataCardBike
-  })
+  });
+})
+
+router.get('/delete-shop', function(req,res,next) {
+  for (let k = 0; k < dataCardBike.length ; k++) {
+    if (dataCardBike[k].name == req.query.name) {
+      dataCardBike.splice(k,1);
+    }
+  }
+  res.render('shop', {
+    basket: dataCardBike
+  });
+})
+
+router.post('/update-shop', function(req,res,next) {
+  for (let k = 0; k < dataCardBike.length ; k++) {
+    if (dataCardBike[k].name == req.body.name) {
+      dataCardBike[k].quantity = req.body.quantity;
+    }
+  }
+  res.render('shop', {
+    basket: dataCardBike
+  });
 })
 
 module.exports = router;
