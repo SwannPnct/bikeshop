@@ -32,7 +32,7 @@
             <div class="row ariane">
                 <nav aria-label="breadcrumb" class="col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/index">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="/">Shop</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Basket</li>
                     </ol>
                 </nav>
@@ -40,6 +40,12 @@
 
 
             <h1>Basket</h1>
+
+            <% if (basket.length == 0) { %>
+                <em style="color:red"> No article in the basket. </em>
+            <%
+            } else {%> 
+
 
             <div class="row">
                 <table class="table">
@@ -104,6 +110,8 @@
                     <button class="btn btn-outline-info btn-sm btn-checkout" name="button-checkout">Checkout</button>
                 </div>
             </div>
+
+            <% } %>
                 
         </div>
         

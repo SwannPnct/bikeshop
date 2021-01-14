@@ -34,8 +34,11 @@ const dataBike = [
   },
 ]
 
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
   res.render('index', { 
     bikes : dataBike
    });
@@ -44,41 +47,52 @@ router.get('/', function(req, res, next) {
 
 
 
-const dataCardBike = [
-  
-];
-
 router.get('/shop', function(req,res,next) {
-  dataCardBike.push({
+
+  if (!req.session.dataCardBike) {
+    req.session.dataCardBike = [];
+  }
+  
+  for (let l = 0 ; l < req.session.dataCardBike.length ; l++) {
+    if (req.session.dataCardBike[l].name == req.query.name) {
+      req.session.dataCardBike[l].quantity++;
+      res.render('shop', {
+        basket: req.session.dataCardBike
+      });
+      return;
+    }
+  }
+
+  req.session.dataCardBike.push({
     name: req.query.name,
     img : req.query.img,
     price : req.query.price,
     quantity : 1,
   });
   res.render('shop', {
-    basket: dataCardBike
+    basket: req.session.dataCardBike
   });
 })
 
 router.get('/delete-shop', function(req,res,next) {
-  for (let k = 0; k < dataCardBike.length ; k++) {
-    if (dataCardBike[k].name == req.query.name) {
-      dataCardBike.splice(k,1);
+  for (let k = 0; k < req.session.dataCardBike.length ; k++) {
+    if (req.session.dataCardBike[k].name == req.query.name) {
+      req.session.dataCardBike.splice(k,1);
     }
   }
   res.render('shop', {
-    basket: dataCardBike
+    basket: req.session.dataCardBike
   });
 })
 
 router.post('/update-shop', function(req,res,next) {
-  for (let k = 0; k < dataCardBike.length ; k++) {
-    if (dataCardBike[k].name == req.body.name) {
-      dataCardBike[k].quantity = req.body.quantity;
+  for (let k = 0; k < req.session.dataCardBike.length ; k++) {
+    if (req.session.dataCardBike[k].name == req.body.name) {
+      req.session.dataCardBike[k].quantity = req.body.quantity;
     }
   }
   res.render('shop', {
-    basket: dataCardBike
+    basket: req.session.dataCardBike
   });
 })
 
