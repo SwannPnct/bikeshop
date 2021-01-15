@@ -75,25 +75,29 @@ router.get('/shop', function(req,res,next) {
 })
 
 router.get('/delete-shop', function(req,res,next) {
-  for (let k = 0; k < req.session.dataCardBike.length ; k++) {
-    if (req.session.dataCardBike[k].name == req.query.name) {
-      req.session.dataCardBike.splice(k,1);
-    }
-  }
-  res.render('shop', {
+  
+    req.session.dataCardBike.splice(req.query.index,1);
+    res.render('shop', {
     basket: req.session.dataCardBike
   });
 })
 
 router.post('/update-shop', function(req,res,next) {
-  for (let k = 0; k < req.session.dataCardBike.length ; k++) {
-    if (req.session.dataCardBike[k].name == req.body.name) {
-      req.session.dataCardBike[k].quantity = req.body.quantity;
-    }
-  }
-  res.render('shop', {
+
+  if (req.body.quantity == 0) {
+    req.session.dataCardBike.splice(req.body.index,1);
+    res.render('shop', {
+      basket: req.session.dataCardBike
+    })
+  } else {
+    req.session.dataCardBike[req.body.index].quantity = req.body.quantity;
+
+    res.render('shop', {
     basket: req.session.dataCardBike
   });
+  }
+
+  
 })
 
 module.exports = router;

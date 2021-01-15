@@ -77,13 +77,14 @@
                             <td>
                                 <form action="/update-shop" method="POST">
                                     <input type="hidden" name="name" value="<%= basket[i].name %>">
+                                    <input type="hidden" name="index" value="<%= i %>">
                                     <input type="text" name="quantity" class="quantity" value= <%= basket[i].quantity %> >
-                                    <button class="btn btn-outline-info btn-sm" name="refresh"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="btn btn-outline-info btn-sm" name="refresh"><em class="fas fa-sync-alt"></em></button>
                                 </form>
                             </td>
                             <td><%= basket[i].price %>€</td>
                             <td><%= basket[i].price * basket[i].quantity %>€</td>
-                            <td><a class="btn btn-outline-info btn-sm" href="/delete-shop?name=<%= basket[i].name %>"><i class="far fa-trash-alt"></i></a></td>
+                            <td><a class="btn btn-outline-info btn-sm" href="/delete-shop?index=<%= i %>"><em class="far fa-trash-alt"></em></a></td>
                           </tr>
                             
                         <%
