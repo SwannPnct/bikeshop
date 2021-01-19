@@ -65,8 +65,10 @@
 
                         <% 
                         let total = 0;
+                        
                         for (let i = 0; i < basket.length; i++) {
                             total += basket[i].price * basket[i].quantity;
+                            
                         %>
 
                         <tr class="basket-item">
@@ -103,6 +105,15 @@
                         <td class="total-box">Total Basket : </td>
                         <td><%= total %>€</td>
                         <td></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="total-box">Total taxes : </td>
+                        <td><%= calculatedTaxes %>€ </td>
+                        <td><em id="taxes_info"><%= calculatedTaxes == 0 ? "Frais de port offerts" : "" %></em></td>
                       </tr>
                     </tbody>
                 </table>
